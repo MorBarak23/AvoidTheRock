@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/img_records_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        >
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:backgroundTint="#45000000"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="0dp"
+            >
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1"
+            >
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Name"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="30sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records00"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="N/A"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records10"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="N/A"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records20"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="N/A"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records30"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="N/A"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records40"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="N/A"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records50"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="N/A"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records60"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="N/A"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records70"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="N/A"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records80"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="N/A"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records90"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="N/A"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1"
+            >
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records_record"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Record"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="30sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records01"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="-----"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records11"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="-----"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records21"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="-----"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records31"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="-----"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records41"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="-----"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records51"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="-----"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records61"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="-----"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records71"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="-----"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records81"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="-----"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/lbl_records91"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="-----"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="italic|bold"
+                        android:textSize="26sp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </RelativeLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_back"
+        app:backgroundTint="#00000000"
+        app:backgroundTintMode="screen"
+        android:layout_margin="15dp"
+        android:contentDescription="Back to home page"
+        >
+
+    </com.google.android.material.button.MaterialButton>
+
+</RelativeLayout>

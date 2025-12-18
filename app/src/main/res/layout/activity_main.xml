@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+
+    android:background="@drawable/img_background_road"
+    >
+
+    <RelativeLayout
+        android:id="@+id/btnLayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        >
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:background="#00FFFFFF"
+            android:layout_marginLeft="15dp"
+            android:padding="5dp"
+            android:contentDescription="Move left"
+            app:icon="@drawable/icn_button_left"
+            app:iconSize="60dp"
+            android:layout_marginBottom="40dp"
+            >
+
+        </com.google.android.material.button.MaterialButton>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:background="#00FFFFFF"
+            android:layout_alignParentRight="true"
+            android:padding="5dp"
+            android:contentDescription="Move right"
+            app:icon="@drawable/icn_button_right"
+            app:iconSize="60dp"
+            android:layout_marginBottom="40dp"
+            >
+
+        </com.google.android.material.button.MaterialButton>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnLayout"
+        >
+
+        <LinearLayout
+            android:id="@+id/matrix"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+
+            <LinearLayout
+                android:id="@+id/matrixCol0"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                >
+
+                <ImageView
+                    android:id="@+id/matrix00"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix10"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix20"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix30"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix40"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_car"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/matrixCol1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                >
+
+                <ImageView
+                    android:id="@+id/matrix01"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix11"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix21"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix31"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix41"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_car"
+                    android:layout_weight="1"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/matrixCol2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                >
+
+                <ImageView
+                    android:id="@+id/matrix02"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix12"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix22"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix32"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix42"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_car"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="112dp"
+        android:layout_height="60dp"
+        android:layout_margin="7dp"
+        android:background="#56FFFFFF"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="2dp"
+            >
+
+            <ImageView
+                android:id="@+id/icnheart1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/icn_heart"
+                android:layout_weight="1"
+                />
+
+            <ImageView
+                android:id="@+id/icnheart2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/icn_heart"
+                android:layout_weight="1"
+                />
+
+            <ImageView
+                android:id="@+id/icnheart3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/icn_heart"
+                android:layout_weight="1"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lbl_score"
+        android:layout_width="100dp"
+        android:layout_height="65dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="7dp"
+        android:background="#56FFFFFF"
+        android:text="0"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="#5c0c16"
+        android:gravity="center"
+        >
+
+    </com.google.android.material.textview.MaterialTextView>
+
+
+
+</RelativeLayout>
+
+
