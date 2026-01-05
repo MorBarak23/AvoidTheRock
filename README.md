@@ -3,7 +3,7 @@
 A classic Android survival racing game written in Kotlin.
 The goal is simple: dodge obstacles, survive as long as possible, maximize your score and break records !
 
-This project integrates various elements as:
+This project integrates various elements such as:
 * motion sensors
 * Google Maps SDK
 * complex data persistence

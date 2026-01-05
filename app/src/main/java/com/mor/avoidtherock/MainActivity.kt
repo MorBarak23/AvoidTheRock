@@ -1,5 +1,6 @@
 package com.mor.avoidtherock
 
+import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.LocationManager
@@ -17,6 +18,9 @@ import android.view.Gravity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import kotlin.math.abs
+import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
 
 
 class MainActivity : AppCompatActivity() {
@@ -198,6 +202,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateUIHearts() { // check's if there was life count down
         if (gameManager.wasCrash) {
+            vibrate()
             SoundManager.playSound(SoundManager.SOUND_CRASH)
             gameManager.wasCrash = false
         }
@@ -208,6 +213,14 @@ class MainActivity : AppCompatActivity() {
             binding.icnheart2.isVisible = false
         } else if (gameManager.lifeCounter < 3) {
             binding.icnheart1.isVisible = false
+        }
+    }
+
+    private fun vibrate() {
+        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+
+        if (vibrator.hasVibrator()) {
+            vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
         }
     }
 
