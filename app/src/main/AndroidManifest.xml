@@ -2,31 +2,45 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
+        android:name=".MyGameApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_avoid_the_rock_foreground"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_avoid_the_rock_foreground"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AvoidTheRock">
+        android:theme="@style/Theme.AvoidTheRock"
+        >
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-
         <activity
             android:name=".MenuActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity android:name=".RecordsActivity" />
-    </application>
 
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDPvtNW1q__yuRFlkmZHRNezTqg_3v4uK0" />
+
+    </application>
 </manifest>

@@ -1,7 +1,8 @@
 package com.mor.avoidtherock
 
-import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.location.LocationManager
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
@@ -10,23 +11,29 @@ import androidx.core.view.*
 import com.google.android.material.button.MaterialButton
 import com.mor.avoidtherock.databinding.ActivityMainBinding
 import java.util.*
-import android.content.DialogInterface
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import android.view.Gravity
-
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import kotlin.math.abs
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var gameManager: GameManager
+    private lateinit var accSensorApi: AccSensorApi
+    private var isSensorMode = false
+    private var canMove = true // for sensor fun
     private var timer: Timer? = null
-    private val DELAY: Long = 500
     private lateinit var rockLocations: Array<Array<ImageView>>
     private lateinit var carLocations: Array<ImageView>
-    private val rows = 5
-    private val cols = 3
+    private val rows = 7
+    private val cols = 5
+    private var lat: Double = 0.0
+    private var lon: Double = 0.0
+    var gameDelay : Long = 400
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,27 +45,120 @@ class MainActivity : AppCompatActivity() {
         hideSystemUI()
 
         carLocations = arrayOf(
-            binding.matrix40,
-            binding.matrix41,
-            binding.matrix42
+            binding.matrix60,
+            binding.matrix61,
+            binding.matrix62,
+            binding.matrix63,
+            binding.matrix64,
         )
 
         SoundManager.playSound(SoundManager.SOUND_GAME_START)
 
-        createRockLocation(rows, cols) // create matrix of the app screen.
+        createRockLocation() // create matrix of the app screen.
         gameManager = GameManager(rows, cols)
+
+        initSensor()
+
+
+        getUserPermission()
 
         binding.btnLeft.setOnClickListener { whenPressing(binding.btnLeft) }
         binding.btnRight.setOnClickListener { whenPressing(binding.btnRight) }
+
     }
 
-    private fun createRockLocation(rows: Int, cols: Int) {
+    private fun getUserPermission() {
+        val locationPermissionRequest = registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions.getOrDefault(android.Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                }
+                permissions.getOrDefault(android.Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                }
+                else -> {
+                }
+            }
+        }
+
+        locationPermissionRequest.launch(arrayOf(
+            android.Manifest.permission.ACCESS_FINE_LOCATION,
+            android.Manifest.permission.ACCESS_COARSE_LOCATION
+        ))
+    }
+
+    private fun saveScoreWithLocation() {
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+
+            val lastKnownLocationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+            val lastKnownLocationNetwork = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+
+            val location = lastKnownLocationGPS ?: lastKnownLocationNetwork
+
+            if (location != null) {
+                lat = location.latitude
+                lon = location.longitude
+            }
+        }
+
+    }
+
+    private fun initSensor() {
+        accSensorApi = AccSensorApi(this, object : AccSensorCallBack {
+            override fun data(x: Float, y: Float, z: Float) {
+                if (isSensorMode) {
+                    moveCarBySensor(x)
+                }
+            }
+        })
+    }
+
+    private fun moveCarBySensor(x: Float) {
+        val absX = abs(x)
+
+        if (absX < 1.5) {
+            if (!canMove) {
+                canMove = true
+            }
+        }
+
+        if (canMove && absX > 2.0) {
+
+            if (x > 0) {
+                gameManager.moveCarLeft()
+            } else {
+                gameManager.moveCarRight()
+            }
+
+            canMove = false
+        }
+
+    }
+
+    private fun activateSensorMode() {
+        accSensorApi.start()
+        binding.btnLeft.isVisible = false
+        binding.btnRight.isVisible = false
+    }
+
+    private fun deactivateSensorMode() {
+        accSensorApi.stop()
+        binding.btnLeft.isVisible = true
+        binding.btnRight.isVisible = true
+    }
+
+    private fun createRockLocation() {
         rockLocations = arrayOf(
-            arrayOf(binding.matrix00, binding.matrix01, binding.matrix02),
-            arrayOf(binding.matrix10, binding.matrix11, binding.matrix12),
-            arrayOf(binding.matrix20, binding.matrix21, binding.matrix22),
-            arrayOf(binding.matrix30, binding.matrix31, binding.matrix32),
-            arrayOf(binding.matrix40, binding.matrix41, binding.matrix42) )
+            arrayOf(binding.matrix00, binding.matrix01, binding.matrix02, binding.matrix03, binding.matrix04),
+            arrayOf(binding.matrix10, binding.matrix11, binding.matrix12,binding.matrix13, binding.matrix14),
+            arrayOf(binding.matrix20, binding.matrix21, binding.matrix22, binding.matrix23, binding.matrix24),
+            arrayOf(binding.matrix30, binding.matrix31, binding.matrix32, binding.matrix33, binding.matrix34),
+            arrayOf(binding.matrix40, binding.matrix41, binding.matrix42, binding.matrix43, binding.matrix44),
+            arrayOf(binding.matrix50, binding.matrix51, binding.matrix52, binding.matrix53, binding.matrix54),
+            arrayOf(binding.matrix60, binding.matrix61, binding.matrix62, binding.matrix63, binding.matrix64))
     }
 
     private fun whenPressing(btn: MaterialButton) {
@@ -85,6 +185,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 else if (gameManager.matrix[i][j] == 1) { // show rock where matrix == 1
                     currentIm.setImageResource(R.drawable.icn_rock)
+                } else if (gameManager.matrix[i][j] == 2) { // show coin where matrix == 2
+                    currentIm.setImageResource(R.drawable.icn_coin)
                 }
             }
         }
@@ -114,12 +216,13 @@ class MainActivity : AppCompatActivity() {
             SoundManager.playSound(SoundManager.SOUND_GAME_OVER)
             stopTimer()
 
-            val prefs = getSharedPreferences("GamePrefs", Context.MODE_PRIVATE)
+            val prefs = getSharedPreferences("GamePrefs", MODE_PRIVATE)
             val playerName = prefs.getString("PLAYER_NAME", "Guest") ?: "Guest"
 
-            ScoreManager.addScore(this, playerName, gameManager.score)
+            saveScoreWithLocation()
+            ScoreManager.addScore(this, playerName, gameManager.score, lat, lon)
 
-            changeActivity("-Game Over-", "Do you want to play again?")
+            changeActivity("-Game Over-", "Your Score is: ${gameManager.score}\nDo you want to play again?")
         }
     }
 
@@ -182,33 +285,46 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-/////////////////////// onResume & onStop ///////////////////////
+/////////////////////// onResume & onStop & Timers ///////////////////////
 
     override fun onResume() {
         super.onResume()
+
+        val prefs = getSharedPreferences("GamePrefs", MODE_PRIVATE)
+        gameDelay = prefs.getLong("GAME_SPEED", 700L)
+
+        val sharedPreferences = getSharedPreferences("GameSettings", MODE_PRIVATE)
+        isSensorMode = sharedPreferences.getBoolean("KEY_SENSOR_MODE", false)
+
+        if (isSensorMode) {
+            activateSensorMode()
+        } else {
+            deactivateSensorMode()
+        }
+
         hideSystemUI()
         startTimer()
     }
 
     override fun onPause() {
         super.onPause()
+        accSensorApi.stop()
         stopTimer()
     }
 
     private fun startTimer() {
-        if (timer == null) {
-            timer = Timer()
-            timer?.schedule(object : TimerTask() {
-                override fun run() {
-                    SoundManager.stopMusic()
-                    gameManager.updateGame()
-                    runOnUiThread {
-                        updateUI()
-                        checkGameOver()
-                    }
+        timer = Timer()
+
+        timer?.schedule(object : TimerTask() {
+            override fun run() {
+                gameManager.updateGame()
+                SoundManager.stopMusic()
+                runOnUiThread {
+                    updateUI()
+                    checkGameOver()
                 }
-            }, 0, DELAY)
-        }
+            }
+        }, 0, gameDelay)
     }
 
     private fun stopTimer() {

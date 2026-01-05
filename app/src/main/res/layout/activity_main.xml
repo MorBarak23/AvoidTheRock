@@ -116,6 +116,24 @@
                     android:id="@+id/matrix40"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix50"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix60"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:src="@drawable/icn_car"
                     android:layout_weight="1"
                     android:visibility="invisible"
@@ -172,8 +190,27 @@
                     android:id="@+id/matrix41"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix51"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix61"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:src="@drawable/icn_car"
                     android:layout_weight="1"
+                    android:visibility="invisible"
                     />
 
             </LinearLayout>
@@ -225,6 +262,171 @@
 
                 <ImageView
                     android:id="@+id/matrix42"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix52"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix62"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_car"
+                    android:layout_weight="1"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/matrixCol3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                >
+
+                <ImageView
+                    android:id="@+id/matrix03"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix13"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix23"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix33"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix43"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix53"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix63"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_car"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/matrixCol4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                >
+
+                <ImageView
+                    android:id="@+id/matrix04"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix14"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix24"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix34"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix44"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix54"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/icn_rock"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:id="@+id/matrix64"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:src="@drawable/icn_car"

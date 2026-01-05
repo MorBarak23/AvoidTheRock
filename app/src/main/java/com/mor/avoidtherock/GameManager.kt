@@ -6,7 +6,7 @@ class GameManager(val rows: Int, val cols: Int) {
     val car: Car = Car(cols/2)
     val matrix: Array<IntArray> = Array(rows) { IntArray(cols) }
     var lifeCounter: Int = 3
-    private var tickCount = 0 // counter for when to bring a rock
+    var tickCounter: Int = 0
     var wasCrash: Boolean = false
     var score: Int = 0;
     var isGameOver: Boolean = false
@@ -31,8 +31,6 @@ class GameManager(val rows: Int, val cols: Int) {
     fun updateGame() {
         if (isGameOver) return
 
-        tickCount++
-
         for (i in rows - 1 downTo 1) {
             for (j in 0 until cols) {
                 matrix[i][j] = matrix[i - 1][j] // promote the rock
@@ -43,12 +41,15 @@ class GameManager(val rows: Int, val cols: Int) {
             matrix[0][j] = 0 // clean the first row
         }
 
-        // bring a rock every two ticks
-        if (tickCount % 2 == 0) {
-            val randomCol = Random.nextInt(cols)
-            matrix[0][randomCol] = 1
-            score++
+        val randomRockCol = Random.nextInt(cols)
+        matrix[0][randomRockCol] = 1
+        if(tickCounter % 5 == 0) {
+            val randomCoinCol = Random.nextInt(cols)
+            matrix[0][randomCoinCol] = 2
         }
+
+        score++
+        tickCounter++
 
         checkCollision()
     }
@@ -61,6 +62,10 @@ class GameManager(val rows: Int, val cols: Int) {
         if (matrix[carRow][carCol] == 1) { // check's if there is a rock in the car location
             reduceLife()
             wasCrash = true
+        }
+
+        if (matrix[carRow][carCol] == 2) { // check's if there is a coin in the car location
+            score += 5
         }
     }
 

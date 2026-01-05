@@ -57,12 +57,6 @@ object SoundManager {
         }
     }
 
-    fun pauseMusic() {
-        if (mediaPlayer?.isPlaying == true) {
-            mediaPlayer?.pause()
-        }
-    }
-
     fun stopMusic() {
         if (mediaPlayer?.isPlaying == true) {
             mediaPlayer?.pause()
@@ -75,11 +69,4 @@ object SoundManager {
         soundPool?.play(soundId, 1f, 1f, 0, 0, 1f)
     }
 
-    fun release() {
-        mediaPlayer?.release()
-        mediaPlayer = null
-        soundPool?.release()
-        soundPool = null
-        soundMap.clear()
-    }
 }
