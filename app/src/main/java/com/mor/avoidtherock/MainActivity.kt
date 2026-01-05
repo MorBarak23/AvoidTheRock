@@ -119,25 +119,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun moveCarBySensor(x: Float) {
-        val absX = abs(x)
 
-        if (absX < 1.5) {
-            if (!canMove) {
-                canMove = true
-            }
+        val targetCol: Int = when {
+            x > 4.0 -> 0
+            x < -4.0 -> 4
+
+            x > 1.5 -> 1
+            x < -1.5 -> 3
+
+            else -> 2
         }
 
-        if (canMove && absX > 2.0) {
-
-            if (x > 0) {
-                gameManager.moveCarLeft()
-            } else {
-                gameManager.moveCarRight()
-            }
-
-            canMove = false
-        }
-
+        gameManager.car.setCurrentCol(targetCol)
     }
 
     private fun activateSensorMode() {
