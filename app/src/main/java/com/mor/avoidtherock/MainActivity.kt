@@ -1,6 +1,5 @@
 package com.mor.avoidtherock
 
-import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.LocationManager
@@ -18,7 +17,6 @@ import android.view.Gravity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import kotlin.math.abs
-import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 
@@ -217,7 +215,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun vibrate() {
-        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        val vibrator = getSystemService(VIBRATOR_SERVICE) as Vibrator
 
         if (vibrator.hasVibrator()) {
             vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
