@@ -69,5 +69,19 @@ class GameManager(val rows: Int, val cols: Int) {
         }
     }
 
+    fun reset() {
+        lifeCounter = 3
+        score = 0
+        tickCounter = 0
+        isGameOver = false
+
+        for (i in 0 until rows) {
+            for (j in 0 until cols) {
+                matrix[i][j] = 0
+            }
+        }
+
+    }
+
 
 }

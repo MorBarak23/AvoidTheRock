@@ -5,17 +5,14 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.mor.avoidtherock.databinding.ActivityRecordsBinding
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 
 class RecordsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityRecordsBinding
-    private lateinit var googleMap: GoogleMap
     private lateinit var topScores: List<ScoreEntry>
+    private val mapManager = MapManager()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,41 +62,6 @@ class RecordsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun initMap() {
-        val mapFragment = SupportMapFragment.newInstance()
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.lbl_map, mapFragment)
-            .commit()
-
-        mapFragment.getMapAsync(this)
-    }
-
-    override fun onMapReady(map: GoogleMap) {
-        googleMap = map
-
-        loadMarkersOnMap()
-        initList()
-    }
-
-    private fun loadMarkersOnMap() {
-
-        for (score in topScores) {
-            val location = LatLng(score.lat, score.lon)
-
-            googleMap.addMarker(
-                MarkerOptions()
-                    .position(location)
-                    .title("${score.name}: ${score.score}")
-            )
-        }
-
-        if (topScores.isNotEmpty() && (topScores[0].lat != 0.0 || topScores[0].lon != 0.0)) {
-            val winnerLoc = LatLng(topScores[0].lat, topScores[0].lon)
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(winnerLoc, 12f))
-        }
-    }
-
     private fun initList() {
 
         for (i in 0 until 10) {
@@ -131,11 +93,30 @@ class RecordsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun zoomToRecord(lat: Double, lon: Double) {
-        if (lat != 0.0 || lon != 0.0) {
-            val location = LatLng(lat, lon)
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
+    private fun initMap() {
+        val mapFragment = SupportMapFragment.newInstance()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.lbl_map, mapFragment)
+            .commit()
+
+        mapFragment.getMapAsync(this)
+    }
+
+    override fun onMapReady(map: GoogleMap) {
+        mapManager.initMap(map)
+        mapManager.addMarkers(topScores)
+
+        if (topScores.isNotEmpty()) {
+            val winner = topScores[0]
+            mapManager.zoomToLocation(winner.lat, winner.lon, 12f)
         }
+
+        initList()
+    }
+
+    private fun zoomToRecord(lat: Double, lon: Double) {
+        mapManager.zoomToLocation(lat, lon, 15f)
     }
 }
 

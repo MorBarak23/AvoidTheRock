@@ -16,18 +16,14 @@ import androidx.appcompat.app.AlertDialog
 import android.view.Gravity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import kotlin.math.abs
-import android.os.VibrationEffect
-import android.os.Vibrator
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var gameManager: GameManager
-    private lateinit var accSensorApi: AccSensorApi
     private var isSensorMode = false
-    private var canMove = true // for sensor fun
+    private lateinit var tiltDetector: TiltDetector
     private var timer: Timer? = null
     private lateinit var rockLocations: Array<Array<ImageView>>
     private lateinit var carLocations: Array<ImageView>
@@ -54,19 +50,15 @@ class MainActivity : AppCompatActivity() {
             binding.matrix64,
         )
 
-        SoundManager.playSound(SoundManager.SOUND_GAME_START)
-
         createRockLocation() // create matrix of the app screen.
         gameManager = GameManager(rows, cols)
 
-        initSensor()
-
+        tiltDetector = TiltDetector(this, gameManager)
 
         getUserPermission()
 
         binding.btnLeft.setOnClickListener { whenPressing(binding.btnLeft) }
         binding.btnRight.setOnClickListener { whenPressing(binding.btnRight) }
-
     }
 
     private fun getUserPermission() {
@@ -108,43 +100,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun initSensor() {
-        accSensorApi = AccSensorApi(this, object : AccSensorCallBack {
-            override fun data(x: Float, y: Float, z: Float) {
-                if (isSensorMode) {
-                    moveCarBySensor(x)
-                }
-            }
-        })
-    }
-
-    private fun moveCarBySensor(x: Float) {
-
-        val targetCol: Int = when {
-            x > 4.0 -> 0
-            x < -4.0 -> 4
-
-            x > 1.5 -> 1
-            x < -1.5 -> 3
-
-            else -> 2
-        }
-
-        gameManager.car.setCurrentCol(targetCol)
-    }
-
-    private fun activateSensorMode() {
-        accSensorApi.start()
-        binding.btnLeft.isVisible = false
-        binding.btnRight.isVisible = false
-    }
-
-    private fun deactivateSensorMode() {
-        accSensorApi.stop()
-        binding.btnLeft.isVisible = true
-        binding.btnRight.isVisible = true
-    }
-
     private fun createRockLocation() {
         rockLocations = arrayOf(
             arrayOf(binding.matrix00, binding.matrix01, binding.matrix02, binding.matrix03, binding.matrix04),
@@ -154,6 +109,21 @@ class MainActivity : AppCompatActivity() {
             arrayOf(binding.matrix40, binding.matrix41, binding.matrix42, binding.matrix43, binding.matrix44),
             arrayOf(binding.matrix50, binding.matrix51, binding.matrix52, binding.matrix53, binding.matrix54),
             arrayOf(binding.matrix60, binding.matrix61, binding.matrix62, binding.matrix63, binding.matrix64))
+    }
+
+    private fun currentSensorMode() {
+        val sharedPreferences = getSharedPreferences("GameSettings", MODE_PRIVATE)
+        isSensorMode = sharedPreferences.getBoolean("KEY_SENSOR_MODE", false)
+
+        if (isSensorMode) {
+            tiltDetector.start()
+            binding.btnLeft.isVisible = false
+            binding.btnRight.isVisible = false
+        } else {
+            tiltDetector.stop()
+            binding.btnLeft.isVisible = true
+            binding.btnRight.isVisible = true
+        }
     }
 
     private fun whenPressing(btn: MaterialButton) {
@@ -193,8 +163,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateUIHearts() { // check's if there was life count down
         if (gameManager.wasCrash) {
-            vibrate()
-            SoundManager.playSound(SoundManager.SOUND_CRASH)
+            SoundManager.instance.vibrate()
+            SoundManager.instance.playSound(R.raw.snd_crash)
             gameManager.wasCrash = false
         }
 
@@ -207,17 +177,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun vibrate() {
-        val vibrator = getSystemService(VIBRATOR_SERVICE) as Vibrator
-
-        if (vibrator.hasVibrator()) {
-            vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
-        }
-    }
-
     private fun checkGameOver() {
         if (gameManager.isGameOver) {
-            SoundManager.playSound(SoundManager.SOUND_GAME_OVER)
+            SoundManager.instance.playSound(R.raw.snd_game_over)
             stopTimer()
 
             val prefs = getSharedPreferences("GamePrefs", MODE_PRIVATE)
@@ -268,15 +230,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun restartGame() {
-        gameManager = GameManager(rows = rows, cols = cols)
-        gameManager.lifeCounter = 3
+        gameManager.reset()
+        resetUI()
+
+        SoundManager.instance.playSound(R.raw.snd_game_start)
+        currentSensorMode()
+
+        updateUI()
+        startTimer()
+    }
+
+    private fun resetUI() {
+        gameManager.car.setCurrentCol(cols/2)
+
+        for (i in rockLocations.indices) {
+            for (j in rockLocations[i].indices) {
+                rockLocations[i][j].isVisible = false
+            }
+        }
+
+        binding.lblScore.text = "00"
 
         binding.icnheart1.isVisible = true
         binding.icnheart2.isVisible = true
         binding.icnheart3.isVisible = true
-
-        updateUI()
-        startTimer()
     }
 
     // hide bars of the phone
@@ -294,25 +271,20 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        val prefs = getSharedPreferences("GamePrefs", MODE_PRIVATE)
-        gameDelay = prefs.getLong("GAME_SPEED", 700L)
+        val prefs = getSharedPreferences("GameSettings", MODE_PRIVATE)
+        gameDelay = prefs.getLong("GAME_SPEED", 600L)
 
-        val sharedPreferences = getSharedPreferences("GameSettings", MODE_PRIVATE)
-        isSensorMode = sharedPreferences.getBoolean("KEY_SENSOR_MODE", false)
-
-        if (isSensorMode) {
-            activateSensorMode()
-        } else {
-            deactivateSensorMode()
-        }
+        currentSensorMode()
 
         hideSystemUI()
+        SoundManager.instance.stopMusic()
+        SoundManager.instance.playSound(R.raw.snd_game_start)
         startTimer()
     }
 
     override fun onPause() {
         super.onPause()
-        accSensorApi.stop()
+        tiltDetector.stop()
         stopTimer()
     }
 
@@ -322,7 +294,6 @@ class MainActivity : AppCompatActivity() {
         timer?.schedule(object : TimerTask() {
             override fun run() {
                 gameManager.updateGame()
-                SoundManager.stopMusic()
                 runOnUiThread {
                     updateUI()
                     checkGameOver()

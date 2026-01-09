@@ -5,7 +5,6 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import kotlin.math.abs
 
 interface AccSensorCallBack {
     fun data(x: Float, y: Float, z: Float)

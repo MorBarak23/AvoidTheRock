@@ -1,14 +1,7 @@
 package com.mor.avoidtherock
 
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.text.InputFilter
-import android.view.Gravity
-import android.widget.EditText
-import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.mor.avoidtherock.databinding.ActivityMenuBinding
 
@@ -21,8 +14,7 @@ class MenuActivity : AppCompatActivity() {
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        SoundManager.init(this)
-        SoundManager.playMusic()
+        SoundManager.instance.playMusic()
 
         initViews()
     }
@@ -50,7 +42,7 @@ class MenuActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        SoundManager.playMusic()
+        SoundManager.instance.playMusic()
     }
 
 }

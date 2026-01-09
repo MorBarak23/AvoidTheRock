@@ -1,6 +1,5 @@
 package com.mor.avoidtherock
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
@@ -10,7 +9,6 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.materialswitch.MaterialSwitch
 import com.mor.avoidtherock.databinding.ActivitySettingsBinding
 
 class SettingsActivity : AppCompatActivity() {
@@ -20,40 +18,13 @@ class SettingsActivity : AppCompatActivity() {
     private val FAST : Long = 350L
     private val SLOW : Long = 600L
 
-    lateinit var speedSwitch: MaterialSwitch
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        speedSwitch = binding.btnFastMode
-        prefs = getSharedPreferences("GamePrefs", MODE_PRIVATE)
-        val savedDelay = prefs.getLong("GAME_SPEED", SLOW)
-
-        speedSwitch.isChecked = savedDelay != SLOW
-
-        speedSwitch.setOnCheckedChangeListener { _, isChecked ->
-            val editor = prefs.edit()
-
-            if (isChecked) {
-                editor.putLong("GAME_SPEED", FAST)
-            } else {
-                editor.putLong("GAME_SPEED", SLOW)
-            }
-            editor.apply()
-        }
-
-        val sharedPreferences = getSharedPreferences("GameSettings", MODE_PRIVATE)
-        val isSensorOn = sharedPreferences.getBoolean("KEY_SENSOR_MODE", false)
-        binding.btnSensorMode.isChecked = isSensorOn
-
-        binding.btnSensorMode.setOnCheckedChangeListener { _, isChecked ->
-            val editor = sharedPreferences.edit()
-            editor.putBoolean("KEY_SENSOR_MODE", isChecked)
-            editor.apply()
-        }
+        switchButtons()
 
         initViews()
         loadPlayerName()
@@ -69,6 +40,28 @@ class SettingsActivity : AppCompatActivity() {
             finish()
         }
 
+    }
+
+    private fun switchButtons() {
+        val prefs = getSharedPreferences("GameSettings", MODE_PRIVATE)
+        val editor = prefs.edit()
+
+        val savedDelay = prefs.getLong("GAME_SPEED", SLOW)
+        binding.btnFastMode.isChecked = (savedDelay != SLOW)
+
+        binding.btnFastMode.setOnCheckedChangeListener { _, isChecked ->
+            val speed = if (isChecked) FAST else SLOW
+            editor.putLong("GAME_SPEED", speed)
+            editor.apply()
+        }
+
+        val isSensorOn = prefs.getBoolean("KEY_SENSOR_MODE", false)
+        binding.btnSensorMode.isChecked = isSensorOn
+
+        binding.btnSensorMode.setOnCheckedChangeListener { _, isChecked ->
+            editor.putBoolean("KEY_SENSOR_MODE", isChecked)
+            editor.apply()
+        }
     }
 
     private fun showNameDialog() {
@@ -111,7 +104,7 @@ class SettingsActivity : AppCompatActivity() {
 
     // save name in phone memory function
     private fun savePlayerName(name: String) {
-        val sharedPreferences = getSharedPreferences("GamePrefs", Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("GamePrefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("PLAYER_NAME", name)
         editor.apply()
@@ -119,7 +112,7 @@ class SettingsActivity : AppCompatActivity() {
 
     // load name from phone memory function
     private fun loadPlayerName() {
-        val sharedPreferences = getSharedPreferences("GamePrefs", Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("GamePrefs", MODE_PRIVATE)
         val savedName = sharedPreferences.getString("PLAYER_NAME", "Guest")
         binding.lblName.text = savedName
     }
